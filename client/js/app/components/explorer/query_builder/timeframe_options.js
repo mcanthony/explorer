@@ -3,20 +3,21 @@
  */
 
 var React = require('react');
+var _ = require('lodash');
 var ExplorerActions = require('../../../actions/ExplorerActions');
 
 var TimeframeOptions = React.createClass({
 
   handleChange: function(event) {
     var updates = _.cloneDeep(this.props.model);
-    updates.query.timeframe = event.target.value;
-    ExplorerActions.update(this.props.modelId, updates);
+    updates.query.time = _.find(this.props.options, { name: event.target.value }).value;
+    ExplorerActions.update(this.props.model.id, updates);
   },
 
   buildOptionNodes: function() {
     return this.props.options.map(function(option) {
       return (
-        <option value={option.value}>{option.name}</option>
+        <option value={option.name} key={option.name}>{option.name}</option>
       );
     });
   },
@@ -24,9 +25,30 @@ var TimeframeOptions = React.createClass({
   getDefaultProps: function() {
     return {
       options: [
-        { name: 'This month to date', value: 'this_1_month' },
-        { name: 'This week to date',  value: 'this_1_week' },
-        { name: 'Today so far',       value: 'this_1_day' }
+        {
+          name: 'This month to date',
+          value: {
+            relativity: 'this',
+            amount: '1',
+            sub_timeframe: 'months'
+          }
+        },
+        { 
+          name: 'This week to date',
+          value: {
+            relativity: 'this',
+            amount: '1',
+            sub_timeframe: 'weeks'
+          }
+        },
+        { 
+          name: 'Today so far',
+          value: {
+            relativity: 'this',
+            amount: '1',
+            sub_timeframe: 'days'
+          }
+        }
       ]
     }
   },

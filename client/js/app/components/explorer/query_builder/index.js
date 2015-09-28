@@ -22,6 +22,8 @@ var ExplorerActions = require('../../../actions/ExplorerActions');
 var runValidations = require('../../../utils/ValidationUtils').runValidations;
 var FilterValidations = require('../../../validations/FilterValidations');
 
+var TimeframeOptions = require('./timeframe_options.js');
+
 function validFilters(filters) {
   return _.filter(filters, function(filter) {
     return runValidations(FilterValidations.filter, filter).isValid;
@@ -112,9 +114,7 @@ var QueryBuilder = React.createClass({
                              handleChange={this.handleChange} />
           {targetPropertyField}
           {percentileField}
-          <Timeframe ref="timeframe"
-                     model={this.props.model}
-                     project={this.props.project} />
+          <TimeframeOptions model={this.props.model} />
           <hr className="fieldset-divider" />
           {groupByField}
           <div className="field-component">
