@@ -112,12 +112,12 @@ describe('components/explorer/query_builder/csv_extraction', function() {
 
     it('should call runEmailExtraction with the right parameters, including timeframes', function () {
       var model = TestHelpers.createExplorerModel();
-      model.timeframe_type = 'relative';
       model.query = {
         email: 'peeps@keen.io',
         latest: '1000',
         event_collection: 'signups',
         analysis_type: 'extraction',
+        timeframe_type: 'relative',
         time: {
           relativity: 'this',
           amount: '1',

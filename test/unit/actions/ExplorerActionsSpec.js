@@ -177,10 +177,10 @@ describe('actions/ExplorerActions', function() {
         {
           id: '1',
           name: 'favorite 1',
-          timeframe_type: 'relative',
           query: {
             event_collection: 'clicks',
             analysis_type: 'count',
+            timeframe_type: 'relative',
             time: {
               relativity: 'this',
               amount: 1,
@@ -194,11 +194,11 @@ describe('actions/ExplorerActions', function() {
         {
           id: '2',
           name: 'favorite 2',
-          timeframe_type: 'relative',
           query: {
             event_collection: 'clicks',
             analysis_type: 'sum',
             target_property: 'size',
+            timeframe_type: 'relative',
             time: {
               relativity: 'this',
               amount: 1,
@@ -212,11 +212,11 @@ describe('actions/ExplorerActions', function() {
         {
           id: '3',
           name: 'favorite 3',
-          timeframe_type: 'relative',
           query: {
             event_collection: 'clicks',
             analysis_type: 'max',
             target_property: 'amount',
+            timeframe_type: 'relative',
             time: {
               relativity: 'this',
               amount: 1,

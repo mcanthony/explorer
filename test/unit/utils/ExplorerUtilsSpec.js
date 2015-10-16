@@ -35,9 +35,9 @@ describe('utils/ExplorerUtils', function() {
     });
     it('should remove the timezone if the timeframe_type is absolute', function () {
       var explorer = {
-        timeframe_type: 'absolute',
         query: {
           timezone: 'US/Mountain',
+          timeframe_type: 'absolute',
           time: {
             start: new Date("Jan 1, 2015 1:00 PM"),
             end: new Date("Jan 2, 2015 1:00 PM")
@@ -100,10 +100,10 @@ describe('utils/ExplorerUtils', function() {
     });
     it('should set the timeframe if there is one', function () {
       var explorer = { 
-        timeframe_type: 'relative',
         query: { 
           event_collection: 'click',
           analysis_type: 'count',
+          timeframe_type: 'relative',
           time: {
             relativity: 'this',
             amount: '1',
@@ -153,7 +153,6 @@ describe('utils/ExplorerUtils', function() {
         result: null,
         loading: false,
         isValid: true,
-        timeframe_type: 'relative',
         query: {
           event_collection: null,
           analysis_type: null,
@@ -162,6 +161,7 @@ describe('utils/ExplorerUtils', function() {
           group_by: null,
           interval: null,
           timezone: 'UTC',
+          timeframe_type: 'relative',
           filters: null,
           email: null,
           latest: null,
@@ -197,7 +197,6 @@ describe('utils/ExplorerUtils', function() {
         result: null,
         loading: false,
         isValid: true,
-        timeframe_type: 'relative',
         query: {
           event_collection: 'clicks',
           analysis_type: 'count',
@@ -206,6 +205,7 @@ describe('utils/ExplorerUtils', function() {
           group_by: null,
           interval: null,
           timezone: 'UTC',
+          timeframe_type: 'relative',
           filters: null,
           email: null,
           latest: null,
@@ -228,7 +228,9 @@ describe('utils/ExplorerUtils', function() {
   describe('getTimeframe', function () {
     it('should call the right timeframe builder for absolute timeframes', function () {
       var explorer = {
-        timeframe_type: 'absolute'
+        query: {
+          timeframe_type: 'absolute'
+        }
       };
       var stub = sinon.stub(ExplorerUtils.timeframeBuilders, 'absolute_timeframe');
       ExplorerUtils.getTimeframe(explorer);
@@ -237,7 +239,9 @@ describe('utils/ExplorerUtils', function() {
     });
     it('should call the right timeframe builder for relative timeframes', function () {
       var explorer = {
-        timeframe_type: 'relative'
+        query: {
+          timeframe_type: 'relative'
+        }
       };
       var stub = sinon.stub(ExplorerUtils.timeframeBuilders, 'relative_timeframe');
       ExplorerUtils.getTimeframe(explorer);
@@ -250,9 +254,9 @@ describe('utils/ExplorerUtils', function() {
     describe('absolute_timeframe', function () {
       it('should properly build a timeframe object', function () {
         var explorer = {
-          timeframe_type: 'absolute',
           query: {
             timezone: 'US/Hawaii',
+            timeframe_type: 'absolute',
             time: {
               start: new Date(moment().subtract(1, 'days').startOf('day').format()),
               end: new Date(moment().startOf('day').format())
@@ -371,7 +375,6 @@ describe('utils/ExplorerUtils', function() {
   describe('getApiQueryUrl', function(){
     beforeEach(function(){
       this.explorer = _.assign({}, TestHelpers.createExplorerModel(), {
-        timeframe_type: 'relative',
         query: {
           analysis_type: 'count',
           event_collection: 'clicks',
@@ -389,6 +392,7 @@ describe('utils/ExplorerUtils', function() {
               coercion_type: 'Number'
             },
           ],
+          timeframe_type: 'relative',
           time: {
             relativity: 'this',
             amount: '1',
@@ -465,10 +469,10 @@ describe('utils/ExplorerUtils', function() {
 
       it('has the timeframe attribute', function(){
         this.explorer = {
-          timeframe_type: 'relative',
           query: {
             analysis_type: 'count',
             event_collection: 'clicks',
+            timeframe_type: 'relative',
             timeframe: 'this_1_days',
             time: {
               relativity: 'this',

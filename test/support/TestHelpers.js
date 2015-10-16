@@ -37,7 +37,6 @@ module.exports = {
 			loading: false,
 			saving: false,
 			isValid: true,
-			timeframe_type: 'relative',
 			name: '',
 			query: {
 			  event_collection: null,
@@ -47,6 +46,7 @@ module.exports = {
 			  group_by: null,
 			  interval: null,
 			  timezone: ProjectUtils.getConstant('DEFAULT_TIMEZONE'),
+			  timeframe_type: 'relative',
 			  filters: null,
 			  email: null,
 			  latest: null,
